@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UNO</title>
+    <link rel="stylesheet" href="./css/base.css" />
+    <link rel="stylesheet" href="./css/layout.css" />
+    <link rel="stylesheet" href="./css/cards.css" />
+    <link rel="stylesheet" href="./css/buttons.css" />
+    <link rel="stylesheet" href="./css/modal.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="left">
+        <div class="uno-mark"><span>UNO</span></div>
+        <div class="titles">
+          <h1>UNO</h1>
+          <p>Prototype hors-ligne. Multijoueur en ligne à venir.</p>
+        </div>
+      </div>
+      <div class="header-status">
+        <div>Joueur: <strong id="currentPlayer">-</strong></div>
+        <div>Direction: <strong id="direction"></strong></div>
+        <div id="message" class="message"></div>
+      </div>
+    </header>
+    <main>
+      <section class="board">
+        <div class="center">
+          <div class="discard">
+            <div id="discardTop" class="card placeholder">-</div>
+            <div class="deck-row">
+              <button id="drawBtn" class="btn">Piocher</button>
+            </div>
+          </div>
+        </div>
+        <div class="players" id="players"></div>
+        <div id="modalOverlay" class="modal-overlay hidden" aria-hidden="true"></div>
+      </section>
+    </main>
+
+    <!-- TOUT EN UN SEUL FICHIER - PLUS DE BORDEL D'IMPORTS -->
+    <script>
+      // Copie directe de logic.js, bot_smart.js ET main.js ici
+      console.log("UNO Game Loading...");
+      
+      // === LOGIC.JS ===
