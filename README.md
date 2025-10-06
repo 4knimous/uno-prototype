@@ -1,5 +1,7 @@
 # UNO — Prototype en ligne (base locale)
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/4knimous/uno-prototype)
+
 Ce projet est un prototype complet du jeu UNO, développé en JavaScript sans dépendances externes, avec une interface web locale et une intelligence artificielle pour affronter des bots. Il a été conçu pour être simple à comprendre, facile à étendre et prêt à évoluer vers un mode multijoueur en ligne.
 
 ## Objectif et raison du projet

@@ -4,7 +4,7 @@
 
 ```bash
 # Cloner le projet
-git clone https://github.com/votre-username/uno-prototype.git
+git clone https://github.com/4knimous/uno-prototype.git
 cd uno-prototype
 
 # Installer Node.js (16+) si nécessaire
@@ -16,6 +16,34 @@ node server.js
 
 # Ouvrir http://localhost:5173 dans le navigateur
 ```
+
+## Déploiement sur Vercel (RECOMMANDÉ)
+
+### Méthode 1: Via l'interface Vercel (plus simple)
+1. Aller sur [vercel.com](https://vercel.com)
+2. Se connecter avec votre compte GitHub
+3. Cliquer "New Project"
+4. Importer le dépôt `4knimous/uno-prototype`
+5. Vercel détectera automatiquement la configuration
+6. Cliquer "Deploy"
+
+### Méthode 2: Via CLI Vercel
+```bash
+# Installer Vercel CLI
+npm i -g vercel
+
+# Dans le dossier du projet
+vercel
+
+# Suivre les instructions
+# Choisir "y" pour déployer
+# Votre projet sera en ligne en quelques secondes !
+```
+
+Le fichier `vercel.json` est déjà configuré pour :
+- Servir les fichiers statiques du dossier `public/`
+- Utiliser Node.js pour le serveur
+- Rediriger toutes les routes vers `server.js`
 
 ## Structure pour déploiement en production
 
