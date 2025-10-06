@@ -276,9 +276,6 @@ async function showVictorySummary(winnerIndex) {
   });
 }
 
-// === Affiche une modale d'action temporaire (ex : +2, Passe, etc.) ===
-// title : titre de la modale (ex : "+2", "PASSER")
-// subtitle : sous-titre optionnel
 function showActionModal(title, subtitle = "") {
   modalOverlay.classList.remove("hidden");
   modalOverlay.setAttribute("aria-hidden", "false");
@@ -288,16 +285,14 @@ function showActionModal(title, subtitle = "") {
   const s = document.createElement("p"); s.className = "subtitle"; s.textContent = subtitle;
   modal.appendChild(h); modal.appendChild(s);
   modalOverlay.appendChild(modal);
-  
-  // Affichage plus long pour mieux voir les actions
   return new Promise((resolve) => {
-    setTimeout(() => { modal.classList.add("exit"); }, 2000);
+    setTimeout(() => { modal.classList.add("exit"); }, 1200);
     setTimeout(() => {
       modalOverlay.classList.add("hidden");
       modalOverlay.setAttribute("aria-hidden", "true");
       modalOverlay.innerHTML = "";
       resolve();
-    }, 2500);
+    }, 1500);
   });
 }
 // === Affiche une modale d'action temporaire (ex : +2, Passe, etc.) ===
@@ -400,61 +395,7 @@ function render() {
 
 }
 
-// === Demande à l'utilisateur de choisir une couleur (pour les jokers) ===
 async function askColor() { return await showColorPicker(); }
-
-// === Sélecteur de couleur pour les jokers ===
-async function showColorPicker() {
-  return new Promise((resolve) => {
-    modalOverlay.classList.remove("hidden");
-    modalOverlay.setAttribute("aria-hidden", "false");
-    modalOverlay.innerHTML = "";
-    modalOverlay.onclick = null;
-
-    const modal = document.createElement("div");
-    modal.className = "modal color-picker";
-    const title = document.createElement("h2");
-    title.className = "title";
-    title.textContent = "Choisissez une couleur";
-    modal.appendChild(title);
-
-    const colors = document.createElement("div");
-    colors.className = "color-options";
-    colors.style.display = "flex";
-    colors.style.gap = "10px";
-    colors.style.justifyContent = "center";
-    colors.style.marginTop = "20px";
-    
-    const colorOptions = [
-      { name: "red", label: "Rouge", color: "#e53e3e" },
-      { name: "yellow", label: "Jaune", color: "#f6e05e" },
-      { name: "green", label: "Vert", color: "#38a169" },
-      { name: "blue", label: "Bleu", color: "#3182ce" }
-    ];
-
-    colorOptions.forEach(({ name, label, color }) => {
-      const btn = document.createElement("button");
-      btn.className = "btn color-btn";
-      btn.style.backgroundColor = color;
-      btn.style.color = name === "yellow" ? "black" : "white";
-      btn.style.border = "2px solid " + color;
-      btn.style.padding = "12px 20px";
-      btn.style.borderRadius = "8px";
-      btn.style.cursor = "pointer";
-      btn.style.fontSize = "14px";
-      btn.style.fontWeight = "bold";
-      btn.textContent = label;
-      btn.onclick = () => {
-        closeModal();
-        resolve(name);
-      };
-      colors.appendChild(btn);
-    });
-
-    modal.appendChild(colors);
-    modalOverlay.appendChild(modal);
-  });
-}
 
 async function tryPlay(index) {
   if (game.turn !== 0) return;
@@ -569,13 +510,8 @@ async function maybeBotTurn() {
   if (game.turn === 0) return;
   const idx = game.turn;
   const actor = game.players[idx];
-  
-  console.log(`🤖 ${actor.name} réfléchit...`);
-  await new Promise((resolve) => setTimeout(resolve, 800)); // Pause plus longue pour voir le bot
-  
+  await new Promise((resolve) => setTimeout(resolve, 450));
   const res = botAction(idx);
-  console.log(`🤖 ${actor.name} a choisi:`, res.type, res.played || '');
-  
   render();
   if (res.type === "win") {
     await showVictorySummary(idx);
@@ -583,10 +519,10 @@ async function maybeBotTurn() {
   }
   if (res.type === "play") {
     const t = res.played?.type;
-    if (t === "reverse") await showActionModal("INVERSION", `${actor.name} change le sens`);
-    if (t === "skip") await showActionModal("PASSER", `${actor.name} fait passer le joueur suivant`);
-    if (t === "draw2") await showActionModal("+2", `${actor.name} fait piocher 2 cartes`);
-    if (t === "wild4") await showActionModal("+4", `${actor.name} fait piocher 4 cartes`);
+    if (t === "reverse") await showActionModal("INVERSION", "Le sens change");
+    if (t === "skip") await showActionModal("PASSER", "Tour sauté");
+    if (t === "draw2") await showActionModal("+2", "Pioche 2");
+    if (t === "wild4") await showActionModal("+4", "Pioche 4");
   } else if (res.type === "passPenalty") {
     if (res.drawnCount > 0) {
       await showActionModal(
@@ -598,14 +534,13 @@ async function maybeBotTurn() {
     if (res.drawnCount > 0) {
       await showActionModal(
         "PIOCHE",
-        `${actor.name} pioche puis passe son tour`
+        `${actor.name} pioche ${res.drawnCount} carte${res.drawnCount > 1 ? "s" : ""}`
       );
     }
     await showActionModal("PASSER", `${actor.name} ne peut pas jouer`);
   }
   if (game.turn === 0) {
-    message("À vous de jouer !");
-    console.log("🎮 C'est à vous de jouer !");
+    message("A vous de jouer.");
   } else {
     await maybeBotTurn();
   }
