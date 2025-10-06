@@ -1,0 +1,34 @@
+{
+  "name": "uno-prototype",
+  "version": "1.0.0",
+  "description": "Prototype UNO en JavaScript vanilla avec IA pour bots et interface locale",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "echo \"Aucun test pour le moment. Utilisez npm run dev pour tester manuellement.\"",
+    "lint": "echo \"Aucun linter configuré pour le moment.\""
+  },
+  "keywords": [
+    "uno",
+    "jeu",
+    "javascript",
+    "prototype",
+    "bot",
+    "ia",
+    "carte"
+  ],
+  "author": "matou",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/4knimous/uno-prototype.git"
+  },
+  "bugs": {
+    "url": "https://github.com/4knimous/uno-prototype/issues"
+  },
+  "homepage": "https://github.com/4knimous/uno-prototype#readme"
+}
