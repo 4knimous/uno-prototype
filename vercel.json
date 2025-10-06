@@ -1,22 +1,9 @@
 {
   "version": 2,
-  "cleanUrls": true,
-  "trailingSlash": false,
-  "public": true,
-  "functions": {
-    "public/**": {
-      "runtime": "nodejs16.x"
-    }
-  },
-  "headers": [
+  "rewrites": [
     {
-      "source": "/js/(.*).js",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/javascript; charset=utf-8"
-        }
-      ]
+      "source": "/(.*)",
+      "destination": "/api/index.js"
     }
   ]
 }
