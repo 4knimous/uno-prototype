@@ -22,7 +22,7 @@
   "author": "matou",
   "license": "MIT",
   "engines": {
-    "node": "18.x"
+    "node": "22.x"
   },
   "repository": {
     "type": "git",
