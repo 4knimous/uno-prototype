@@ -1,6 +1,6 @@
 # UNO — Prototype en ligne (base locale)
 
-Ce projet est un prototype complet du jeu UNO, développé en JavaScript sans dépendances externes, avec une interface web locale et une intelligence artificielle pour affronter des bots. Il a été conçu pour être simple à comprendre, facile à étendre et prêt à évoluer vers un mode multijoueur en ligne.
+Ce projet est un prototype complet du jeu UNO, développé en JavaScript sans dépendances externes, avec une interface web locale pour affronter des bots. Il a été conçu pour être simple à comprendre, facile à étendre et prêt à évoluer vers un mode multijoueur en ligne.
 
 ## Objectif et raison du projet
 
@@ -92,6 +92,7 @@ Puis ouvrez [http://localhost:5173](http://localhost:5173) dans votre navigateur
 ## Contribution
 
 Toute contribution est la bienvenue ! N'hésitez pas à proposer des améliorations, corriger des bugs ou suggérer de nouvelles fonctionnalités.
+NEO
 
 ---
 
