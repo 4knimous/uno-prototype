@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "build": "echo 'No build step needed for static files'",
+    "build": "echo 'Static files ready in public/'",
     "test": "echo \"Aucun test pour le moment. Utilisez npm run dev pour tester manuellement.\"",
     "lint": "echo \"Aucun linter configuré pour le moment.\""
   },
