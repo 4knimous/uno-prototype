@@ -2,5 +2,16 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
-  "public": true
+  "public": true,
+  "headers": [
+    {
+      "source": "/js/(.*).js",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/javascript; charset=utf-8"
+        }
+      ]
+    }
+  ]
 }
