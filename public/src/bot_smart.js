@@ -1,7 +1,7 @@
 // === Intelligence artificielle avancée pour le bot UNO ===
 // Ce fichier propose une version "intelligente" du bot, qui choisit la meilleure carte à jouer selon la situation.
 
-import { COLORS } from "./uno/logic.js";
+import { COLORS } from "./logic.js";
 
 // === Fonction principale d'action du bot ===
 // game : instance de la partie UNO

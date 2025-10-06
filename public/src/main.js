@@ -2,7 +2,7 @@
 // Ce fichier gère l'affichage, l'interaction utilisateur et la logique de partie côté client pour le jeu UNO.
 // Chaque section/fonction est commentée pour faciliter la compréhension et la maintenance par d'autres développeurs.
 
-import { Game, COLORS } from "./uno/logic.js";
+import { Game, COLORS } from "./logic.js";
 
 
 // === Sélection des éléments du DOM ===
