@@ -395,7 +395,59 @@ function render() {
 
 }
 
+// === Demande à l'utilisateur de choisir une couleur (pour les jokers) ===
 async function askColor() { return await showColorPicker(); }
+
+// === Sélecteur de couleur pour les jokers ===
+async function showColorPicker() {
+  return new Promise((resolve) => {
+    modalOverlay.classList.remove("hidden");
+    modalOverlay.setAttribute("aria-hidden", "false");
+    modalOverlay.innerHTML = "";
+    modalOverlay.onclick = null;
+
+    const modal = document.createElement("div");
+    modal.className = "modal color-picker";
+    const title = document.createElement("h2");
+    title.className = "title";
+    title.textContent = "Choisissez une couleur";
+    modal.appendChild(title);
+
+    const colors = document.createElement("div");
+    colors.className = "color-options";
+    colors.style.display = "flex";
+    colors.style.gap = "10px";
+    colors.style.justifyContent = "center";
+    colors.style.marginTop = "20px";
+    
+    const colorOptions = [
+      { name: "red", label: "Rouge", color: "#e53e3e" },
+      { name: "yellow", label: "Jaune", color: "#f6e05e" },
+      { name: "green", label: "Vert", color: "#38a169" },
+      { name: "blue", label: "Bleu", color: "#3182ce" }
+    ];
+
+    colorOptions.forEach(({ name, label, color }) => {
+      const btn = document.createElement("button");
+      btn.className = "btn color-btn";
+      btn.style.backgroundColor = color;
+      btn.style.color = "white";
+      btn.style.border = "none";
+      btn.style.padding = "10px 15px";
+      btn.style.borderRadius = "5px";
+      btn.style.cursor = "pointer";
+      btn.textContent = label;
+      btn.onclick = () => {
+        closeModal();
+        resolve(name);
+      };
+      colors.appendChild(btn);
+    });
+
+    modal.appendChild(colors);
+    modalOverlay.appendChild(modal);
+  });
+}
 
 async function tryPlay(index) {
   if (game.turn !== 0) return;
