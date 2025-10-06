@@ -3,6 +3,11 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "public": true,
+  "functions": {
+    "public/**": {
+      "runtime": "nodejs16.x"
+    }
+  },
   "headers": [
     {
       "source": "/js/(.*).js",
