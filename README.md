@@ -92,7 +92,6 @@ Puis ouvrez [http://localhost:5173](http://localhost:5173) dans votre navigateur
 ## Contribution
 
 Toute contribution est la bienvenue ! N'hésitez pas à proposer des améliorations, corriger des bugs ou suggérer de nouvelles fonctionnalités.
-NEO
 
 ---
 
