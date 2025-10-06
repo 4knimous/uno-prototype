@@ -276,6 +276,9 @@ async function showVictorySummary(winnerIndex) {
   });
 }
 
+// === Affiche une modale d'action temporaire (ex : +2, Passe, etc.) ===
+// title : titre de la modale (ex : "+2", "PASSER")
+// subtitle : sous-titre optionnel
 function showActionModal(title, subtitle = "") {
   modalOverlay.classList.remove("hidden");
   modalOverlay.setAttribute("aria-hidden", "false");
@@ -285,14 +288,16 @@ function showActionModal(title, subtitle = "") {
   const s = document.createElement("p"); s.className = "subtitle"; s.textContent = subtitle;
   modal.appendChild(h); modal.appendChild(s);
   modalOverlay.appendChild(modal);
+  
+  // Affichage plus long pour mieux voir les actions
   return new Promise((resolve) => {
-    setTimeout(() => { modal.classList.add("exit"); }, 1200);
+    setTimeout(() => { modal.classList.add("exit"); }, 2000);
     setTimeout(() => {
       modalOverlay.classList.add("hidden");
       modalOverlay.setAttribute("aria-hidden", "true");
       modalOverlay.innerHTML = "";
       resolve();
-    }, 1500);
+    }, 2500);
   });
 }
 // === Affiche une modale d'action temporaire (ex : +2, Passe, etc.) ===
@@ -431,11 +436,13 @@ async function showColorPicker() {
       const btn = document.createElement("button");
       btn.className = "btn color-btn";
       btn.style.backgroundColor = color;
-      btn.style.color = "white";
-      btn.style.border = "none";
-      btn.style.padding = "10px 15px";
-      btn.style.borderRadius = "5px";
+      btn.style.color = name === "yellow" ? "black" : "white";
+      btn.style.border = "2px solid " + color;
+      btn.style.padding = "12px 20px";
+      btn.style.borderRadius = "8px";
       btn.style.cursor = "pointer";
+      btn.style.fontSize = "14px";
+      btn.style.fontWeight = "bold";
       btn.textContent = label;
       btn.onclick = () => {
         closeModal();
@@ -562,8 +569,13 @@ async function maybeBotTurn() {
   if (game.turn === 0) return;
   const idx = game.turn;
   const actor = game.players[idx];
-  await new Promise((resolve) => setTimeout(resolve, 450));
+  
+  console.log(`🤖 ${actor.name} réfléchit...`);
+  await new Promise((resolve) => setTimeout(resolve, 800)); // Pause plus longue pour voir le bot
+  
   const res = botAction(idx);
+  console.log(`🤖 ${actor.name} a choisi:`, res.type, res.played || '');
+  
   render();
   if (res.type === "win") {
     await showVictorySummary(idx);
@@ -571,10 +583,10 @@ async function maybeBotTurn() {
   }
   if (res.type === "play") {
     const t = res.played?.type;
-    if (t === "reverse") await showActionModal("INVERSION", "Le sens change");
-    if (t === "skip") await showActionModal("PASSER", "Tour sauté");
-    if (t === "draw2") await showActionModal("+2", "Pioche 2");
-    if (t === "wild4") await showActionModal("+4", "Pioche 4");
+    if (t === "reverse") await showActionModal("INVERSION", `${actor.name} change le sens`);
+    if (t === "skip") await showActionModal("PASSER", `${actor.name} fait passer le joueur suivant`);
+    if (t === "draw2") await showActionModal("+2", `${actor.name} fait piocher 2 cartes`);
+    if (t === "wild4") await showActionModal("+4", `${actor.name} fait piocher 4 cartes`);
   } else if (res.type === "passPenalty") {
     if (res.drawnCount > 0) {
       await showActionModal(
@@ -586,13 +598,14 @@ async function maybeBotTurn() {
     if (res.drawnCount > 0) {
       await showActionModal(
         "PIOCHE",
-        `${actor.name} pioche ${res.drawnCount} carte${res.drawnCount > 1 ? "s" : ""}`
+        `${actor.name} pioche puis passe son tour`
       );
     }
     await showActionModal("PASSER", `${actor.name} ne peut pas jouer`);
   }
   if (game.turn === 0) {
-    message("A vous de jouer.");
+    message("À vous de jouer !");
+    console.log("🎮 C'est à vous de jouer !");
   } else {
     await maybeBotTurn();
   }
