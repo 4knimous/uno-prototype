@@ -4,7 +4,7 @@ Merci de votre intérêt pour contribuer à ce projet ! Voici comment vous pouve
 
 ### Rapporter des bugs
 
-1. Vérifiez d'abord que le bug n'a pas déjà été signalé dans les [Issues](https://github.com/Knimous/uno-prototype/issues)
+1. Vérifiez d'abord que le bug n'a pas déjà été signalé dans les [Issues](https://github.com/4Knimous/uno-prototype/issues)
 2. Créez une nouvelle issue avec :
    - Description claire du problème
    - Étapes pour reproduire le bug
